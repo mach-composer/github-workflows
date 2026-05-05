@@ -18,13 +18,13 @@ jobs:
 
     steps:
     - name: Set up Go
-      uses: actions/setup-go@v3
+      uses: actions/setup-go@be3c94b385c4f180051c996d336f57a34c397495 # v3.6.1
       with:
         go-version: ${{ matrix.go-version }}
       id: go
 
     - name: Set up Go modules cache
-      uses: actions/cache@v3
+      uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c # v3.5.0
       env:
         cache-name: cache-go-modules
       with:
@@ -36,9 +36,10 @@ jobs:
           ${{ runner.os }}-go${{ matrix.go-version }}-
 
     - name: Check out code
-      uses: actions/checkout@v3
+      uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       with:
         fetch-depth: 0
+        persist-credentials: false
 
     # - name: golangci-lint
     #   uses: golangci/golangci-lint-action@v3
@@ -52,7 +53,7 @@ jobs:
 
     - name: Prepare release
       if: github.ref == 'refs/heads/main' && github.event.type != 'pull_request'
-      uses: labd/changie-release-action@v0.1.0
+      uses: labd/changie-release-action@408afa709d68c20412e2934e66ae5a72b4385df3 # v0.1.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         release-workflow: 'release.yaml'
